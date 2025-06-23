@@ -173,13 +173,6 @@ export const Header = () => {
                     </Link>
                   ))}
                   <Separator />
-                  <iframe
-                    src="https://github.com/sponsors/wahyall/button"
-                    title="Sponsor wahyall"
-                    height="32"
-                    width="114"
-                    style={{ border: "0", borderRadius: "6px" }}
-                  ></iframe>
                 </div>
               </DrawerContent>
             </Drawer>
