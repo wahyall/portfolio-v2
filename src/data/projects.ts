@@ -1,34 +1,26 @@
 export const PROJECTS = [
   {
-    category: "DePIN Manager",
-    title: "Hivello Dashboard",
-    src: "/images/mockup/hivello_mockup.png",
-    techStack: ["Next.js", "Auth0", "TailwindCSS", "ShadCn", "SWR", "Zustand"],
+    title: "Foody Cipe",
+    src: "/images/projects/foody-cipe.jpg",
+    techStack: ["React.js", "SASS", "Redux", "React Router", "Axios"],
+    url: "https://foody-cipe.netlify.app",
   },
   {
-    category: "Project Management",
-    title: "GrowingSoft",
-    src: "/images/mockup/growing_mockup.png",
-
-    techStack: ["Next.js", "TailwindCSS", "DnD Kit", "React Context"],
+    title: "Islamic Bit",
+    src: "/images/projects/islamic-bit.jpg",
+    techStack: ["Bootstrap", "JavaScript", "JQuery"],
+    url: "https://islamic-bit.netlify.app",
   },
   {
-    category: "Tracking System",
-    title: "Tracki",
-    src: "/images/mockup/tracki_mockup.png",
-
-    techStack: ["React.js", "MUI", "Redux"],
+    title: "Climher",
+    src: "/images/projects/climher.jpg",
+    techStack: ["Bootstrap", "JavaScript"],
+    url: "https://climher.netlify.app",
   },
   {
-    category: "EMS",
-    title: "iLotusland Monitor",
-    src: "/images/mockup/ilotusland_mockup.png",
-    techStack: [
-      "React.js",
-      "Ant Design",
-      "Styled Components",
-      "Redux",
-      "React Hook Form",
-    ],
+    title: "ToTask",
+    src: "/images/projects/totask.jpg",
+    techStack: ["React.js", "SASS"],
+    url: "https://totask.netlify.app",
   },
 ];

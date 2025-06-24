@@ -28,10 +28,10 @@ const links = [
     title: "All",
     href: "/",
   },
-  {
-    title: "Experience",
-    href: "/experience",
-  },
+  // {
+  //   title: "Experience",
+  //   href: "/experience",
+  // },
   {
     title: "Projects",
     href: "/projects",

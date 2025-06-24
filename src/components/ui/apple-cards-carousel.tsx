@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use client"
+"use client";
 import React, {
   useEffect,
   useRef,
@@ -7,87 +7,89 @@ import React, {
   createContext,
   useContext,
   JSX,
-} from "react"
+} from "react";
 import {
   IconArrowNarrowLeft,
   IconArrowNarrowRight,
   IconX,
-} from "@tabler/icons-react"
-import { cn } from "@/lib/utils"
-import { AnimatePresence, motion } from "motion/react"
-import Image, { ImageProps } from "next/image"
-import { useOutsideClick } from "@/hooks/use-outside-click"
+  IconExternalLink,
+} from "@tabler/icons-react";
+import { cn } from "@/lib/utils";
+import { AnimatePresence, motion } from "motion/react";
+import Image, { ImageProps } from "next/image";
+import { useOutsideClick } from "@/hooks/use-outside-click";
 
 interface CarouselProps {
-  items: JSX.Element[]
-  initialScroll?: number
+  items: JSX.Element[];
+  initialScroll?: number;
 }
 
 type Card = {
-  src: string
-  title: string
-  category: string
-  content?: React.ReactNode
-  techStack?: string[]
-}
+  src: string;
+  title: string;
+  category?: string;
+  content?: React.ReactNode;
+  techStack?: string[];
+  url?: string;
+};
 
 export const CarouselContext = createContext<{
-  onCardClose: (index: number) => void
-  currentIndex: number
+  onCardClose: (index: number) => void;
+  currentIndex: number;
 }>({
   onCardClose: () => {},
   currentIndex: 0,
-})
+});
 
 export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
-  const carouselRef = React.useRef<HTMLDivElement>(null)
-  const [canScrollLeft, setCanScrollLeft] = React.useState(false)
-  const [canScrollRight, setCanScrollRight] = React.useState(true)
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const carouselRef = React.useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = React.useState(false);
+  const [canScrollRight, setCanScrollRight] = React.useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     if (carouselRef.current) {
-      carouselRef.current.scrollLeft = initialScroll
-      checkScrollability()
+      carouselRef.current.scrollLeft = initialScroll;
+      checkScrollability();
     }
-  }, [initialScroll])
+  }, [initialScroll]);
 
   const checkScrollability = () => {
     if (carouselRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current
-      setCanScrollLeft(scrollLeft > 0)
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth)
+      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
     }
-  }
+  };
 
   const scrollLeft = () => {
     if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: -300, behavior: "smooth" })
+      carouselRef.current.scrollBy({ left: -300, behavior: "smooth" });
     }
-  }
+  };
 
   const scrollRight = () => {
     if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: 300, behavior: "smooth" })
+      carouselRef.current.scrollBy({ left: 300, behavior: "smooth" });
     }
-  }
+  };
 
   const handleCardClose = (index: number) => {
     if (carouselRef.current) {
-      const cardWidth = isMobile() ? 230 : 384 // (md:w-96)
-      const gap = isMobile() ? 4 : 8
-      const scrollPosition = (cardWidth + gap) * (index + 1)
+      const cardWidth = isMobile() ? 230 : 384; // (md:w-96)
+      const gap = isMobile() ? 4 : 8;
+      const scrollPosition = (cardWidth + gap) * (index + 1);
       carouselRef.current.scrollTo({
         left: scrollPosition,
         behavior: "smooth",
-      })
-      setCurrentIndex(index)
+      });
+      setCurrentIndex(index);
     }
-  }
+  };
 
   const isMobile = () => {
-    return window && window.innerWidth < 768
-  }
+    return window && window.innerWidth < 768;
+  };
 
   return (
     <CarouselContext.Provider
@@ -153,8 +155,8 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
         </div>
       </div>
     </CarouselContext.Provider>
-  )
-}
+  );
+};
 
 export const Card = ({
   card,
@@ -162,42 +164,42 @@ export const Card = ({
   layout = false,
   techStack,
 }: {
-  card: Card
-  index: number
-  layout?: boolean
-  techStack?: string[]
+  card: Card;
+  index: number;
+  layout?: boolean;
+  techStack?: string[];
 }) => {
-  const [open, setOpen] = useState(false)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const { onCardClose } = useContext(CarouselContext)
+  const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { onCardClose } = useContext(CarouselContext);
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
-        handleClose()
+        handleClose();
       }
     }
 
     if (open) {
-      document.body.style.overflow = "hidden"
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "auto"
+      document.body.style.overflow = "auto";
     }
 
-    window.addEventListener("keydown", onKeyDown)
-    return () => window.removeEventListener("keydown", onKeyDown)
-  }, [open])
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
 
-  useOutsideClick(containerRef as any, () => handleClose())
+  useOutsideClick(containerRef as any, () => handleClose());
 
   const handleOpen = () => {
     // setOpen(true)
-  }
+  };
 
   const handleClose = () => {
-    setOpen(false)
-    onCardClose(index)
-  }
+    setOpen(false);
+    onCardClose(index);
+  };
 
   return (
     <>
@@ -230,12 +232,23 @@ export const Card = ({
               >
                 {card.category}
               </motion.p>
-              <motion.p
-                layoutId={layout ? `title-${card.title}` : undefined}
-                className="text-2xl md:text-5xl font-semibold text-neutral-700 mt-4 dark:text-white"
-              >
-                {card.title}
-              </motion.p>
+              <div className="flex items-center gap-4 mt-4">
+                <motion.p
+                  layoutId={layout ? `title-${card.title}` : undefined}
+                  className="text-2xl md:text-5xl font-semibold text-neutral-700 dark:text-white"
+                >
+                  {card.title}
+                </motion.p>
+                {card.url && (
+                  <button
+                    onClick={() => window.open(card.url, "_blank")}
+                    className="flex items-center justify-center p-2 md:p-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors duration-200 shrink-0"
+                    title="Visit Project"
+                  >
+                    <IconExternalLink className="h-4 w-4 md:h-6 md:w-6" />
+                  </button>
+                )}
+              </div>
               <div className="py-10">{card.content}</div>
             </motion.div>
           </div>
@@ -253,19 +266,30 @@ export const Card = ({
         }}
       >
         <div className="absolute h-full top-0 inset-x-0 bg-gradient-to-b from-black/50 via-transparent to-transparent z-30 pointer-events-none" />
-        <div className="relative z-40 p-3 md:p-8">
+        <div className="relative z-40 p-3 md:p-8 w-full">
           <motion.p
             layoutId={layout ? `category-${card.category}` : undefined}
             className="text-white text-base md:text-xl font-semibold  text-left"
           >
             {card.category}
           </motion.p>
-          <motion.p
-            layoutId={layout ? `title-${card.title}` : undefined}
-            className="text-white text-xl md:text-3xl max-w-xs text-left [text-wrap:balance] mt-2 font-black italic"
-          >
-            {card.title}
-          </motion.p>
+          <div className="flex items-center justify-between w-full gap-4 mt-4">
+            <motion.p
+              layoutId={layout ? `title-${card.title}` : undefined}
+              className="text-white text-xl md:text-3xl max-w-xs text-left [text-wrap:balance] font-black italic"
+            >
+              {card.title}
+            </motion.p>
+            {card.url && (
+              <button
+                onClick={() => window.open(card.url, "_blank")}
+                className="flex items-center justify-center p-2 md:p-3 bg-slate-700/30 hover:bg-slate-700/50 border border-slate-300/10 text-white rounded-full transition-colors duration-200 shrink-0"
+                title="Visit Project"
+              >
+                <IconExternalLink className="h-4 w-4 md:h-6 md:w-6" />
+              </button>
+            )}
+          </div>
         </div>
         {techStack?.length && (
           <AnimatePresence>
@@ -292,8 +316,8 @@ export const Card = ({
         />
       </motion.button>
     </>
-  )
-}
+  );
+};
 
 export const BlurImage = ({
   height,
@@ -303,7 +327,7 @@ export const BlurImage = ({
   alt,
   ...rest
 }: ImageProps) => {
-  const [isLoading, setLoading] = useState(true)
+  const [isLoading, setLoading] = useState(true);
   return (
     <Image
       className={cn(
@@ -321,5 +345,5 @@ export const BlurImage = ({
       alt={alt ? alt : "Background of a beautiful view"}
       {...rest}
     />
-  )
-}
+  );
+};

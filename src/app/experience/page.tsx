@@ -35,9 +35,9 @@ export const metadata = {
 export default function Page() {
   return (
     <div>
-      <FullScreen>
+      {/* <FullScreen>
         <ExperienceTimeline />
-      </FullScreen>
+      </FullScreen> */}
     </div>
   );
 }
