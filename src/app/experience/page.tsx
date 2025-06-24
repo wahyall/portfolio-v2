@@ -1,5 +1,5 @@
-import { FullScreen } from "@/components/full-screen";
-import { ExperienceTimeline } from "./containers/experience-timeline";
+// import { FullScreen } from "@/components/full-screen";
+// import { ExperienceTimeline } from "./containers/experience-timeline";
 
 export const metadata = {
   title: "Experience | Wahyall",
