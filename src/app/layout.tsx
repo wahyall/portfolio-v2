@@ -1,5 +1,6 @@
 import { LayoutWithHeader } from "@/components/layout/layout-with-header";
 import { ThemeProvider } from "@/components/theme-provider";
+import { VisitTracker } from "@/components/visit-tracker";
 import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -72,6 +73,7 @@ export default function RootLayout({
           defaultTheme="dark"
           disableTransitionOnChange
         >
+          <VisitTracker />
           <LayoutWithHeader>{children}</LayoutWithHeader>
         </ThemeProvider>
         <Analytics />
