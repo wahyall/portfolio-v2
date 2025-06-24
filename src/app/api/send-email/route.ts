@@ -16,6 +16,11 @@ export async function POST(request: NextRequest) {
 
     const { userAgent, referer } = await request.json();
 
+    // Get user IP address
+    const forwarded = request.headers.get("x-forwarded-for");
+    const realIp = request.headers.get("x-real-ip");
+    const userIp = forwarded?.split(",")[0] || realIp || "Unknown";
+
     const emailData = {
       sender: {
         name: "Wahyall Portfolio",
@@ -36,6 +41,7 @@ export async function POST(request: NextRequest) {
             <p>Someone visited your portfolio!</p>
             <div style="margin-top: 20px; padding: 15px; background-color: #f5f5f5; border-radius: 5px;">
               <p><strong>Visit Details:</strong></p>
+              <p><strong>IP Address:</strong> ${userIp}</p>
               <p><strong>User Agent:</strong> ${userAgent || "Unknown"}</p>
               <p><strong>Referrer:</strong> ${referer || "Direct visit"}</p>
               <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
