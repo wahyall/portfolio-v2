@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://voocgavdbpy2gucg.public.blob.vercel-storage.com/open-graph-6fkPvt3jl60AhDWy2pPhfp3PKoZPrZ.png",
+        url: "https://wahyall.vervel.app/images/thumbnail.png",
         width: 1200,
         height: 630,
         alt: "Wahyall - Frontend Developer Portfolio",
@@ -49,9 +49,7 @@ export const metadata: Metadata = {
     title: "Wahyall | Frontend Developer Portfolio",
     description:
       "Explore Wahyall's frontend projects and expertise in React, Next.js, and modern web development.",
-    images: [
-      "https://voocgavdbpy2gucg.public.blob.vercel-storage.com/open-graph-6fkPvt3jl60AhDWy2pPhfp3PKoZPrZ.png",
-    ],
+    images: ["https://wahyall.vervel.app/images/thumbnail.png"],
   },
   icons: {
     icon: "/favicon.ico",
